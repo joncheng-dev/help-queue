@@ -1,4 +1,5 @@
 import React from "react";
+import HaveYouDebuggedPrompt from "./HaveYouDebugged";
 import NewTicketForm from "./NewTicketForm";
 import TicketList from "./TicketList";
 
