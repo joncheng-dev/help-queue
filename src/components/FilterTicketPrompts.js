@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import TicketList from "./TicketList";
+import NewTicketForm from "./NewTicketForm";
 import HaveYouDebuggedPrompt from "./HaveYouDebugged";
 import HaveYouAskedOthersPrompt from "./HaveYouAskedOthers";
 import HaveYouDocumentedStepsPrompt from "./HaveYouDocumentedSteps";

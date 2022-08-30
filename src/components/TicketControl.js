@@ -1,5 +1,5 @@
 import React from "react";
-import HaveYouDebuggedPrompt from "./HaveYouDebugged";
+import FilterTicketPrompts from "./FilterTicketPrompts";
 import NewTicketForm from "./NewTicketForm";
 import TicketList from "./TicketList";
 
@@ -27,6 +27,10 @@ class TicketControl extends React.Component {
       currentlyVisibleState = <TicketList />;
       buttonText = "Add Ticket";
     }
+    if (!this.state.formVisibleOnPage) {
+      currentlyVisibleState = <FilterTicketPrompts />;
+    }
+
     return (
       <React.Fragment>
         {currentlyVisibleState}
