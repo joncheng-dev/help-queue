@@ -20,12 +20,10 @@ function FilterTicketPrompts() {
 
   return (
     <React.Fragment>
-      <div className="header">
-        <h3>Page Number: {page}</h3>
-      </div>
       <div className="body">{pageDisplay()}</div>
       <div className="footer">
         <button
+          // disabled={}
           onClick={() => {
             if (page === 2) {
               setPage(<NewTicketForm />);
