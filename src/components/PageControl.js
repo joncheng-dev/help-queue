@@ -5,16 +5,20 @@ import HaveYouDebuggedPrompt from "./HaveYouDebugged";
 import HaveYouAskedOthersPrompt from "./HaveYouAskedOthers";
 import HaveYouDocumentedStepsPrompt from "./HaveYouDocumentedSteps";
 
-function FilterTicketPrompts() {
+function PageControl() {
   const [page, setPage] = useState(0);
 
   const pageDisplay = () => {
     if (page === 0) {
-      return <HaveYouDebuggedPrompt />;
+      return <TicketList />;
     } else if (page === 1) {
-      return <HaveYouAskedOthersPrompt />;
+      return <HaveYouDebuggedPrompt />;
     } else if (page === 2) {
+      return <HaveYouAskedOthersPrompt />;
+    } else if (page === 3) {
       return <HaveYouDocumentedStepsPrompt />;
+    } else if (page === 4) {
+      return <NewTicketForm />;
     }
   };
 
@@ -23,13 +27,9 @@ function FilterTicketPrompts() {
       <div className="body">{pageDisplay()}</div>
       <div className="footer">
         <button
-          // disabled={}
+          disabled={page === 4}
           onClick={() => {
-            if (page === 2) {
-              setPage(<NewTicketForm />);
-            } else {
-              setPage((currPage) => currPage + 1);
-            }
+            setPage((currPage) => currPage + 1);
           }}
         >
           Yes, I have.
@@ -46,4 +46,4 @@ function FilterTicketPrompts() {
   );
 }
 
-export default FilterTicketPrompts;
+export default PageControl;
