@@ -22,24 +22,44 @@ function PageControl() {
     }
   };
 
+  let yesButtonText = null;
+  let noButtonText = null;
+
+  if (page === 1 || page === 2 || page === 3) {
+    yesButtonText = "Yes, I have.";
+    noButtonText = "No, I have not.";
+  } else if (page === 4) {
+    yesButtonText = null;
+    noButtonText = null;
+  }
+
   return (
     <React.Fragment>
       <div className="body">{pageDisplay()}</div>
       <div className="footer">
         <button
-          disabled={page === 4}
+          disabled={page !== 0}
+          onClick={() => {
+            setPage(1);
+          }}
+        >
+          Add Ticket
+        </button>
+        <button
+          disabled={page === 0 || page === 4}
           onClick={() => {
             setPage((currPage) => currPage + 1);
           }}
         >
-          Yes, I have.
+          {yesButtonText}
         </button>
         <button
+          disabled={page === 0}
           onClick={() => {
-            setPage(<TicketList />);
+            setPage(0);
           }}
         >
-          No, I have not.
+          {noButtonText}
         </button>
       </div>
     </React.Fragment>
