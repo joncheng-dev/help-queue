@@ -20,6 +20,7 @@ class TicketControl extends React.Component {
       this.setState({
         formVisibleOnPage: false,
         selectedTicket: null,
+        editing: false,
       });
     } else {
       this.setState((prevState) => ({
@@ -54,7 +55,7 @@ class TicketControl extends React.Component {
     this.setState({ editing: true });
   };
 
-  handleEditTicketInList = (ticketToEdit) => {
+  handleEditingTicketInList = (ticketToEdit) => {
     const editedMainTicketList = this.state.mainTicketList.filter((ticket) => ticket.id !== this.state.selectedTicket.id).concat(ticketToEdit);
     this.setState({
       mainTicketList: editedMainTicketList,
