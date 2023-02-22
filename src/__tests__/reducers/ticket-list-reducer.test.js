@@ -1,4 +1,5 @@
 import ticketListReducer from "../../reducers/ticket-list-reducer";
+import { formatDistanceToNow } from "date-fns";
 import * as c from "./../../actions/ActionTypes";
 
 describe("ticketListReducer", () => {
@@ -23,6 +24,10 @@ describe("ticketListReducer", () => {
     names: "Homer and Bart",
     location: "Moe's Tavern",
     issue: "out of Duff Beer",
+    timeOpen: new Date(),
+    formattedWaitTime: formatDistanceToNow(new Date(), {
+      addSuffix: true,
+    }),
     id: 1,
   };
 
@@ -61,6 +66,25 @@ describe("ticketListReducer", () => {
         location: "Try 'n Save",
         issue: "coupon expired",
         id: 2,
+      },
+    });
+  });
+
+  test("Should add a formatted wait time to ticket entry", () => {
+    const { names, location, issue, timeOpen, id } = ticketData;
+    action = {
+      type: c.UPDATE_TIME,
+      formattedWaitTime: "4 minutes ago",
+      id: id,
+    };
+    expect(ticketListReducer({ [id]: ticketData }, action)).toEqual({
+      [id]: {
+        names: names,
+        location: location,
+        issue: issue,
+        timeOpen: timeOpen,
+        id: id,
+        formattedWaitTime: "4 minutes ago",
       },
     });
   });

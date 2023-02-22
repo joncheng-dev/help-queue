@@ -6,6 +6,11 @@ import EditTicketForm from "./EditTicketForm";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import * as a from "./../actions";
+import { formatDistanceToNow } from "date-fns";
+
+formatDistanceToNow(new Date(), {
+  addSuffix: true,
+});
 
 class TicketControl extends React.Component {
   constructor(props) {
@@ -15,6 +20,23 @@ class TicketControl extends React.Component {
       editing: false,
     };
   }
+
+  componentDidMount() {
+    this.waitTimeUpdateTimer = setInterval(() => this.updateTicketElapsedWaitTime(), 1000);
+  }
+
+  componentDidUpdate() {
+    console.log("component updated!");
+  }
+
+  componentWillUnmount() {
+    console.log("component unmounted!");
+    clearInterval(this.waitTimeUpdateTimer);
+  }
+
+  updateTicketElapsedWaitTime = () => {
+    console.log("tick");
+  };
 
   handleClick = () => {
     if (this.state.selectedTicket != null) {
