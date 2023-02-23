@@ -20,6 +20,8 @@ describe("Help Queue actions", () => {
         names: "Homer and Bart",
         location: "Moe's Tavern",
         issue: "out of Duff Beer",
+        timeOpen: 0,
+        formattedWaitTime: "less than a minute ago",
         id: 1,
       })
     ).toEqual({
@@ -27,6 +29,8 @@ describe("Help Queue actions", () => {
       names: "Homer and Bart",
       location: "Moe's Tavern",
       issue: "out of Duff Beer",
+      timeOpen: 0,
+      formattedWaitTime: "less than a minute ago",
       id: 1,
     });
   });
