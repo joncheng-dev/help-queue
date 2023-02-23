@@ -8,9 +8,9 @@ import PropTypes from "prop-types";
 import * as a from "./../actions";
 import { formatDistanceToNow } from "date-fns";
 
-formatDistanceToNow(new Date(), {
-  addSuffix: true,
-});
+// formatDistanceToNow(new Date(), {
+//   addSuffix: true,
+// });
 
 class TicketControl extends React.Component {
   constructor(props) {
@@ -22,20 +22,22 @@ class TicketControl extends React.Component {
   }
 
   componentDidMount() {
-    this.waitTimeUpdateTimer = setInterval(() => this.updateTicketElapsedWaitTime(), 1000);
-  }
-
-  componentDidUpdate() {
-    console.log("component updated!");
+    this.waitTimeUpdateTimer = setInterval(() => this.updateTicketElapsedWaitTime(), 60000);
   }
 
   componentWillUnmount() {
-    console.log("component unmounted!");
     clearInterval(this.waitTimeUpdateTimer);
   }
 
   updateTicketElapsedWaitTime = () => {
-    console.log("tick");
+    const { dispatch } = this.props;
+    Object.values(this.props.mainTicketList).forEach((ticket) => {
+      const newFormattedWaitTime = formatDistanceToNow(ticket.timeOpen, {
+        addSuffix: true,
+      });
+      const action = a.updateTime(ticket.id, newFormattedWaitTime);
+      dispatch(action);
+    });
   };
 
   handleClick = () => {
